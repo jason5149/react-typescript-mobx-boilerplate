@@ -1,26 +1,40 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const Merge = require('webpack-merge');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const common = require('./build/common');
+const dev = require('./build/dev');
+const pro = require('./build/pro');
+const config = require('./project.config');
 
-module.exports = {
-  entry: path.join(__dirname, 'src/index.tsx'),
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: '[name].js',
-  },
-  module: {
-    rules: [
-      {
-        test:/\.ts(x?)$/,
-        use: ['awesome-typescript-loader'],
+const SMP = new SpeedMeasurePlugin();
+
+const env = process.env.APP_ENV;
+
+module.exports = () => {
+  let result;
+
+  if (env == 'dev') {
+    const options = {
+      plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+      ],
+      devServer: {
+        hot: true,
+        port: 8080,
+        proxy: config.proxy,
+        inline: true,
+        compress: true,
+        contentBase: path.resolve('dist'),
+        historyApiFallback: true,
       },
-    ],
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-    }),
-  ],
+      devtool: '#source-map',
+    };
+
+    result = Merge(common, dev, options);
+  } else if (env === 'pro') {
+    result = Merge(common, pro);
+  }
+
+  return SMP.wrap(result);
 };

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import '@styles/index';
+import App from './App';
 
-const init = () => {
+const init: VoidFunction = () => {
   ReactDOM.render(
-    <div>Hello React</div>,
+    <App />,
     document.getElementById('root')
   )
 }
