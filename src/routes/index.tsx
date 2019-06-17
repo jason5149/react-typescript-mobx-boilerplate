@@ -1,6 +1,6 @@
 import { RouteConfig } from 'react-router-config';
+import AsyncLoader from '@components/AsyncLoader';
 import Layout from '@components/Layout';
-import Home from '@pages/Home';
 
 const routes: RouteConfig[] = [
   {
@@ -13,7 +13,7 @@ const routes: RouteConfig[] = [
         routes: [
           {
             path: '/app/home',
-            component: Home,
+            component: AsyncLoader(() => import('@pages/Home')),
           },
         ],
       },

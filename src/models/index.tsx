@@ -1,5 +1,5 @@
 import GlobalStore from './global';
 
 export default {
-  GlobalStore,
+  globalStore: new GlobalStore(),
 };

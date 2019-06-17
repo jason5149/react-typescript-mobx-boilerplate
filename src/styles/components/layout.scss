@@ -1,0 +1,53 @@
+.basic-layout {
+  .ant-layout {
+    @include transition(all, .2s);
+  }
+  .ant-layout-sider {
+    &.sider-menu {
+      z-index: 10;
+      min-height: 100vh;
+      box-shadow: 2px 0 8px 0 rgba(29, 25, 41, .05);
+    }
+    &.fixed-sider {
+      @include position(fixed, 0, null, null, 0);
+    }
+    .logo {
+      height: 64px;
+      overflow: hidden;
+      background: #001529;
+      line-height: 64px;
+      padding: 16px 24px 16px 0;
+      @include bgSrc($logo-url, 32px, 32px);
+      @include position(relative);
+      @include transition(all, .3s);
+    }
+  }
+  .ant-layout-header {
+    @include transition(width, .2s);
+    &.fixed-header {
+      z-index: 2;
+      padding: 0;
+      @include position(fixed, 0, 0);
+    }
+    .global-header {
+      height: 64px;
+      padding: 0;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+      @include position();
+      .trigger {
+        height: 64px;
+        cursor: pointer;
+        padding: 22px 24px;
+        font-size: 20px;
+        transition: all .3s,padding 0s;
+      }
+    }
+  }
+  .ant-layout-content {
+    &.basic-content {
+      margin: 24px;
+      padding-top: 64px;
+    }
+  }
+}

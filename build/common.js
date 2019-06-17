@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const TsImportPlugin = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -25,7 +26,24 @@ module.exports = {
     rules: [
       {
         test: /\.ts(x?)$/,
-        use: ['awesome-typescript-loader'],
+        use: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              /**
+               * replace babel-plugin-import by ts plugin
+               */
+              getCustomTransformers: () => ({
+                before: [TsImportPlugin({
+                  libraryName: 'antd',
+                  libraryDirectory: 'lib',
+                  style: 'css',
+                })],
+              }),
+            },
+          },
+        ],
+        exclude: /node_modules/,
       },
       {
         test: /\.ts(x?)$/,

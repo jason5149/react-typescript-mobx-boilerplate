@@ -1,10 +1,7 @@
-.flexbox {
-  display: flex;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-  display: block;
-  background: url('../assets/img/user.png') 100%;
-}
+@import './helper/mixin.scss';
+@import './helper/function.scss';
+@import './helper/animation.scss';
+@import './base/variable.scss';
+@import './base/reset.scss';
+@import './base/common.scss';
+@import './components/layout.scss';

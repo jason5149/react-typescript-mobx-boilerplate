@@ -1,22 +1,17 @@
 import * as React from 'react';
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
+import { Layout, Button } from 'antd';
 
-class BlankLayout extends React.Component<RouteConfigComponentProps, {}> {
-  goHome = () => {
-    const { history } = this.props;
+interface IBlankLayoutProps extends RouteConfigComponentProps {}
 
-    history.push('/app/home');
-  }
-
+class BlankLayout extends React.Component<IBlankLayoutProps, {}> {
   render() {
     const { route } = this.props;
 
     return (
-      <div>
-        Blank
-        <button onClick={this.goHome}>home</button>
+      <Layout>
         {renderRoutes(route && route.routes)}
-      </div>
+      </Layout>
     );
   }
 };

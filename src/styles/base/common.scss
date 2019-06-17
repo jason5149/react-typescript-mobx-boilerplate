@@ -1,0 +1,22 @@
+*,
+*:before,
+*:after {
+	@include boxSizing;
+}
+
+html,
+body {
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.5;
+  // font-family: 'PingFang SC', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+  font-family: 'Lato,Source Han Sans CN,Microsoft YaHei,sans-serif';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  @include size(100%, 100%);
+}
+
+#root {
+  @include size(100%, 100%);
+  @include position();
+}
